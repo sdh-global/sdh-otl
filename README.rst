@@ -56,7 +56,7 @@ Example with callback and authorization:
 	from sdh.otl import OntTimeLink
 
 	def auth_callback(request, user_email):
-	    user = get_object_or_404(User,
+        user = get_object_or_404(User,
                                  email=user_email)
 	    login(request, user)
 

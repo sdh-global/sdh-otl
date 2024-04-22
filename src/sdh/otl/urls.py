@@ -1,7 +1,7 @@
-from django.conf.urls import url
+from django.urls import re_path
 
 from . import views
 
 urlpatterns = [
-    url(r'^(?P<otp_key>\w+)/$', views.otl_view, name='one-time-link'),
+    re_path(r'^(?P<otp_key>\w+)/$', views.otl_view, name='one-time-link'),
 ]
