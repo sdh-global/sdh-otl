@@ -9,7 +9,7 @@ include = ["sdh.otl"]
 [project]
 name = "sdh.otl"
 description = "Django one time link generator and processor"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
   "Django>=3.2"
 ]

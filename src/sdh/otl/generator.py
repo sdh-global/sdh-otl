@@ -1,10 +1,9 @@
-import random
 import json
+import random
 from importlib import import_module
 
 from django.urls import reverse
 from sdh.redis import RedisConn
-
 
 """
 Module for generate one time link with handler in redirects
@@ -109,7 +108,7 @@ class OneTimeLink:
             data['module'] = callback.__module__
             data['function'] = callback.__name__
 
-        redis_key = '%s%s' % (self.PREFIX, self.key)
+        redis_key = self.redis_key(self.key)
         with RedisConn() as redis:
             redis.hmset(redis_key, data)
             if counter:
@@ -117,6 +116,10 @@ class OneTimeLink:
 
             if expire:
                 redis.expire(redis_key, expire)
+
+    @classmethod
+    def redis_key(cls, key):
+        return '%s%s' % (cls.PREFIX, key)
 
     @classmethod
     def get(cls, key):
@@ -132,7 +135,7 @@ class OneTimeLink:
             KeyError: if no key founds
         """
 
-        redis_key = '%s%s' % (cls.PREFIX, key)
+        redis_key = cls.redis_key(key)
         with RedisConn() as redis:
             data = redis.hgetall(redis_key)
             if not data:
@@ -167,3 +170,9 @@ class OneTimeLink:
 
         return reverse(self.resolve_name,
                        kwargs=self.resolve_kwargs)
+
+    @classmethod
+    def delete(cls, key):
+        """ Immediately delete the counter data """
+        with RedisConn() as redis:
+            redis.delete(cls.redis_key(key))
