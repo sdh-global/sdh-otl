@@ -11,13 +11,16 @@ name = "sdh.otl"
 description = "Django one time link generator and processor"
 version = "1.0.1"
 dependencies = [
-  "Django>=3.2"
+  "Django>=3.2",
+  "sdh.redis"
 ]
 requires-python = ">= 3.8"
-license = {file = 'LICENSE'}
+license = "BSD-2-Clause"
+license-files = ["LICENSE"]
 
 authors = [
     {name = "Viacheslav Vic Bukhantsov", email = "vic.bukhantsov@gmail.com"},
+    {name = "Oleksii (Alex) Koval", email = "alex@koval.kharkov.ua"}
 ]
 
 maintainers = [
@@ -28,7 +31,6 @@ classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Framework :: Django',
-        'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
